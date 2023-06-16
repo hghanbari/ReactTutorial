@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  function formatName(userName) {
+    return userName.toUpperCase();
+  }
+
+  function getGreeting(userName) {
+    if (userName) return <h1>Hello {formatName(userName)}</h1>;
+    else {
+      return <h1>Hello Stranger</h1>;
+    }
+  }
+  const name = "Hamid Ghanbari";
+  const element = <h1>Hello {formatName(name)} !</h1>;
+
+  return getGreeting("Jang");
 }
 
 export default App;
