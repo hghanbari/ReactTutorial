@@ -1,11 +1,10 @@
 import "./App.css";
-
-import Clock from "./Clock";
+import ToggleButton from "./ToggleButton";
 
 function App(props) {
   return (
     <div>
-      <Clock />
+      <ToggleButton />
     </div>
   );
 }
