@@ -4,7 +4,7 @@ export default class TaskItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tsks: this.props.taskItem.task,
+      task: this.props.taskItem.task,
       isEditing: false,
     };
   }
@@ -17,23 +17,35 @@ export default class TaskItem extends Component {
     this.setState({ isEditing: isEditing });
   };
 
+  handleChange = (e) => {
+    this.setState({ task: e.target.value });
+  };
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.editTask(this.props.id, this.state.task);
+    this.setState({ isEditing: false });
+  };
   render() {
     return (
       <tr>
         {this.state.isEditing ? (
           <>
             <td>
-              <form>
+              <form onSubmit={this.handleSubmit}>
                 <input
-                  value={this.stats.task}
-                  onChange={this.handleChenge}
+                  value={this.state.task}
+                  onChange={this.handleChange}
                   autoFocus
                 />
               </form>
             </td>
             <td>
-              <button>Save</button>
-              <button>Back</button>
+              <button onClick={this.handleSubmit} type="Submit">
+                Save
+              </button>
+              <button onClick={() => this.setEditingState(false)} type="bottun">
+                Back
+              </button>
             </td>
           </>
         ) : (
