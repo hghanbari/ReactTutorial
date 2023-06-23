@@ -1,12 +1,8 @@
 import "./App.css";
-import UserForm from "./UserForm";
+import Main from "./componenets/Main";
 
 function App(props) {
-  return (
-    <div>
-      <UserForm />
-    </div>
-  );
+  return <Main />;
 }
 
 export default App;
