@@ -11,12 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-form {
-  width: 400px;
-  margin: 50px auto;
-  border: 2px black solid;
-  padding: 20px;
-}
-form > div {
-  margin: 20px;
+
+.completed {
+  text-decoration: line-through;
 }

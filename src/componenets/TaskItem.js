@@ -8,15 +8,6 @@ export default class TaskItem extends Component {
       isEditing: false,
     };
   }
-
-  deleteTask = () => {
-    this.props.deleteTask(this.props.id);
-  };
-
-  setEditingState = (isEditing) => {
-    this.setState({ isEditing: isEditing });
-  };
-
   handleChange = (e) => {
     this.setState({ task: e.target.value });
   };
@@ -24,6 +15,15 @@ export default class TaskItem extends Component {
     e.preventDefault();
     this.props.editTask(this.props.id, this.state.task);
     this.setState({ isEditing: false });
+  };
+  toggleTask = () => {
+    this.props.toggleTask(this.props.id);
+  };
+  setEditingState = (isEditing) => {
+    this.setState({ isEditing: isEditing });
+  };
+  deleteTask = () => {
+    this.props.deleteTask(this.props.id);
   };
   render() {
     return (
@@ -50,7 +50,21 @@ export default class TaskItem extends Component {
           </>
         ) : (
           <>
-            <td>{this.props.taskItem.task}</td>
+            <td onClick={this.toggleTask}>
+              <input
+                type="checkbox"
+                readOnly
+                checked={this.props.taskItem.isCompleted}
+              />
+              <span
+                className={
+                  this.props.taskItem.isCompleted
+                    ? "completed"
+                    : "not-completed"
+                }>
+                {this.props.taskItem.task}
+              </span>
+            </td>
             <td>
               <button onClick={() => this.setEditingState(true)}>Edit</button>
               <button onClick={this.deleteTask}>Delet</button>

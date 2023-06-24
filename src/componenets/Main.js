@@ -23,6 +23,11 @@ export default class Main extends Component {
     taskItem.task = task;
     this.setState({ tasks: tasks });
   };
+  tolggleTask = (taskId) => {
+    const taskItem = tasks[taskId];
+    taskItem.isCompleted = !taskItem.isCompleted;
+    this.setState({ tasks: tasks });
+  };
   deleteTask = (taskId) => {
     tasks.splice(taskId, 1);
     this.setState({ tasks: tasks });
@@ -38,6 +43,7 @@ export default class Main extends Component {
             tasks={this.state.tasks}
             deleteTask={this.deleteTask}
             editTask={this.editTask}
+            tolggleTask={this.tolggleTask}
           />
         </div>
       </div>
