@@ -8,6 +8,15 @@ export default class TaskItem extends Component {
       isEditing: false,
     };
   }
+  setEditingState = (isEditing) => {
+    this.setState({ isEditing: isEditing });
+  };
+  toggleTask = () => {
+    this.props.toggleTask(this.props.id);
+  };
+  deleteTask = () => {
+    this.props.deleteTask(this.props.id);
+  };
   handleChange = (e) => {
     this.setState({ task: e.target.value });
   };
@@ -15,15 +24,6 @@ export default class TaskItem extends Component {
     e.preventDefault();
     this.props.editTask(this.props.id, this.state.task);
     this.setState({ isEditing: false });
-  };
-  toggleTask = () => {
-    this.props.toggleTask(this.props.id);
-  };
-  setEditingState = (isEditing) => {
-    this.setState({ isEditing: isEditing });
-  };
-  deleteTask = () => {
-    this.props.deleteTask(this.props.id);
   };
   render() {
     return (
@@ -40,10 +40,16 @@ export default class TaskItem extends Component {
               </form>
             </td>
             <td>
-              <button onClick={this.handleSubmit} type="Submit">
+              <button
+                className="save"
+                onClick={this.handleSubmit}
+                type="Submit">
                 Save
               </button>
-              <button onClick={() => this.setEditingState(false)} type="bottun">
+              <button
+                className="back"
+                onClick={() => this.setEditingState(false)}
+                type="bottun">
                 Back
               </button>
             </td>
@@ -66,8 +72,14 @@ export default class TaskItem extends Component {
               </span>
             </td>
             <td>
-              <button onClick={() => this.setEditingState(true)}>Edit</button>
-              <button onClick={this.deleteTask}>Delet</button>
+              <button
+                className="edit"
+                onClick={() => this.setEditingState(true)}>
+                Edit
+              </button>
+              <button className="delet" onClick={this.deleteTask}>
+                Delet
+              </button>
             </td>
           </>
         )}
