@@ -1,11 +1,11 @@
-import logo from "./logo.svg";
 import "./App.css";
-import Counter from "./Counter";
+import NewUserInfo from "./NewUserInfo";
+import UserInfo from "./UserInfo";
 
 function App() {
   return (
     <div>
-      <Counter />
+      <NewUserInfo />
     </div>
   );
 }
