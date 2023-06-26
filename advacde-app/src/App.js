@@ -1,12 +1,12 @@
 import "./App.css";
-import NewUserInfo from "./NewUserInfo";
-import UserInfo from "./UserInfo";
+import Layout from "./Layout";
+import MainContext from "./MainContext";
 
 function App() {
   return (
-    <div>
-      <NewUserInfo />
-    </div>
+    <Layout>
+      <MainContext />
+    </Layout>
   );
 }
 

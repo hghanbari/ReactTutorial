@@ -13,9 +13,32 @@ code {
 }
 
 .user {
-  width: 400px;
+  width: 500px;
   margin: 50 auto;
   padding: 50px;
   background-color: azure;
   border-radius: 20px;
+}
+.header {
+  padding: 10px;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.light {
+  background-color: #e0e0e0;
+  color: #101010;
+}
+
+.dark {
+  background-color: #101010;
+  color: #e0e0e0;
+}
+
+.content {
+  width: 500px;
+  margin: 50px auto;
+  padding: 50px;
 }
