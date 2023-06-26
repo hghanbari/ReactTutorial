@@ -9,7 +9,7 @@ export default class TaskItem extends Component {
     };
   }
   setEditingState = (isEditing) => {
-    this.setState({ isEditing: isEditing });
+    this.setState({ task: this.props.taskItem.task, isEditing: isEditing });
   };
   toggleTask = () => {
     this.props.toggleTask(this.props.id);
