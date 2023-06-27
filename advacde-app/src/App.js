@@ -1,13 +1,8 @@
 import "./App.css";
-import Layout from "./Layout";
-import MainContext from "./MainContext";
+import UserList from "./UserList";
 
 function App() {
-  return (
-    <Layout>
-      <MainContext />
-    </Layout>
-  );
+  return <UserList />;
 }
 
 export default App;
