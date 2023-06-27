@@ -35,7 +35,7 @@ export default function UserList() {
     loadUsers();
   }, []);
   return (
-    <div>
+    <div className="main">
       <h1>Users</h1>
       <button onClick={loadUsers}>Reload usres</button>
       {loading ? (
