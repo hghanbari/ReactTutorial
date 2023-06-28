@@ -1,8 +1,8 @@
 import "./App.css";
-import UserList from "./UserList";
+import Routing from "./Routing";
 
 function App() {
-  return <UserList />;
+  return <Routing />;
 }
 
 export default App;

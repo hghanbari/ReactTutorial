@@ -52,3 +52,27 @@ code {
 th {
   text-align: left;
 }
+
+.pages {
+  width: 800px;
+  background-color: cornsilk;
+  margin: 50px auto;
+}
+
+.page_header {
+  padding: 10px;
+  background-color: yellowgreen;
+}
+
+.page_content {
+  padding: 10px;
+  background-color: aqua;
+}
+
+.link {
+  display: flex;
+  justify-content: space-between;
+}
+.active {
+  font-weight: bold;
+}
