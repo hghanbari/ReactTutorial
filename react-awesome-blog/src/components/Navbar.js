@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 import { ThemeContext } from "../ThemeContext";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const { theme, toggleTheme } = useContext(ThemeContext);
   return (
     <div className="header">
       <div className="header-item">
-        <a href="/">
+        <Link to="/">
           <strong>Awesome Blog</strong>
-        </a>
+        </Link>
       </div>
       <div className="header-item">
         <a href="/login">Login</a>
