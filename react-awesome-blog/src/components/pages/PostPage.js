@@ -18,7 +18,6 @@ const reducer = (state, action) => {
 
 export default function PostPage() {
   const { postId } = useParams();
-  console.log(postId);
   const [state, dispatch] = useReducer(reducer, {
     loading: false,
     post: { user: {} },

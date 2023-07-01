@@ -5,6 +5,7 @@ import { ThemeContext } from "./ThemeContext";
 import Navbar from "./components/Navbar";
 import HomePage from "./components/pages/HomePage";
 import PostPage from "./components/pages/PostPage";
+import LoginPage from "./components/pages/LoginPage";
 
 function App() {
   const { theme } = useContext(ThemeContext);
@@ -17,6 +18,7 @@ function App() {
             <Route path="/post/:postId" element={<PostPage />} />
             <Route path="/serch/:query?" element={<HomePage />} />
             <Route path="/user/:userId" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<HomePage />} />
           </Routes>
         </div>
