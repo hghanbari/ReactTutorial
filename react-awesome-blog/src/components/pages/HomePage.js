@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import React, { useEffect, useReducer } from "react";
 
 const reducer = (state, action) => {
@@ -24,6 +24,13 @@ const reducer = (state, action) => {
         users: action.payload,
         errorUsers: "",
       };
+    case "USER_SUCCESS":
+      return {
+        ...state,
+        loadingUsers: false,
+        user: action.payload,
+        errorUsers: "",
+      };
     case "USERS_FAIL":
       return { ...state, errorUsers: action.payload, loadingUsers: false };
     default:
@@ -31,6 +38,7 @@ const reducer = (state, action) => {
   }
 };
 export default function HomePage() {
+  const { query, userId } = useParams();
   const [state, dispatch] = useReducer(reducer, {
     loadingPosts: false,
     errorPosts: "",
@@ -38,16 +46,31 @@ export default function HomePage() {
     loadingUsers: false,
     errorUsers: "",
     users: [],
+    user: {},
   });
-  const { loadingPosts, errorPosts, posts, loadingUsers, errorUsers, users } =
-    state;
+  const {
+    loadingPosts,
+    errorPosts,
+    posts,
+    loadingUsers,
+    errorUsers,
+    users,
+    user,
+  } = state;
   const loadPosts = async () => {
     dispatch({ type: "POSTS_REQUEST" });
     try {
       const { data } = await axios.get(
-        "https://jsonplaceholder.typicode.com/posts"
+        userId
+          ? "https://jsonplaceholder.typicode.com/posts?userId=" + userId
+          : "https://jsonplaceholder.typicode.com/posts"
       );
-      dispatch({ type: "POSTS_SUCCESS", payload: data });
+      const filterPosts = query
+        ? data.filter(
+            (x) => x.title.indexOf(query) >= 0 || x >= x.body.indexOf(query)
+          )
+        : data;
+      dispatch({ type: "POSTS_SUCCESS", payload: filterPosts });
     } catch (err) {
       dispatch({ type: "POSTS_FAIL", payload: err.message });
     }
@@ -56,9 +79,14 @@ export default function HomePage() {
     dispatch({ type: "USERS_REQUEST" });
     try {
       const { data } = await axios.get(
-        "https://jsonplaceholder.typicode.com/users"
+        userId
+          ? "https://jsonplaceholder.typicode.com/users/" + userId
+          : "https://jsonplaceholder.typicode.com/users"
       );
-      dispatch({ type: "USERS_SUCCESS", payload: data });
+      dispatch({
+        type: userId ? "USER_SUCCESS" : "USERS_SUCCESS",
+        payload: data,
+      });
     } catch (err) {
       dispatch({ type: "USERS_FAIL", payload: err.message });
     }
@@ -66,11 +94,17 @@ export default function HomePage() {
   useEffect(() => {
     loadPosts();
     loadUsre();
-  }, []);
+  }, [query, userId]);
   return (
     <div className="blog">
       <div className="content">
-        <h1>Posts</h1>
+        <h1>
+          {query
+            ? `Results for "${query}"`
+            : userId
+            ? `${user.name} 's Posts`
+            : "Posts"}
+        </h1>
         {loadingPosts ? (
           <div>Loading...</div>
         ) : errorPosts ? (
@@ -98,10 +132,21 @@ export default function HomePage() {
           <div>Error:{errorUsers}</div>
         ) : users.length === 0 ? (
           <div>No user found</div>
+        ) : userId ? (
+          <div>
+            <h2>{user.name}'s Profile</h2>
+            <ul>
+              <li>Email:{user.email}</li>
+              <li>Phone:{user.phone}</li>
+              <li>Website:{user.website}</li>
+            </ul>
+          </div>
         ) : (
           <ul>
             {users.map((user) => (
-              <li key={user.id}>{user.name}</li>
+              <li key={user.id}>
+                <Link to={`/user/${user.id}`}>{user.name}</Link>
+              </li>
             ))}
           </ul>
         )}

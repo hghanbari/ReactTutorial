@@ -15,6 +15,8 @@ function App() {
         <div className="main">
           <Routes>
             <Route path="/post/:postId" element={<PostPage />} />
+            <Route path="/serch/:query?" element={<HomePage />} />
+            <Route path="/user/:userId" element={<HomePage />} />
             <Route path="/" element={<HomePage />} />
           </Routes>
         </div>

@@ -1,8 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ThemeContext } from "../ThemeContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/serch/${query}`);
+  };
+
   const { theme, toggleTheme } = useContext(ThemeContext);
   return (
     <div className="header">
@@ -10,6 +18,17 @@ export default function Navbar() {
         <Link to="/">
           <strong>Awesome Blog</strong>
         </Link>
+      </div>
+      <div className="header-item">
+        <form onSubmit={handleSubmit}>
+          <input
+            onChange={(e) => setQuery(e.target.value)}
+            name="query"
+            type="text"
+            placeholder="serch posts"
+          />
+          <button>Go</button>
+        </form>
       </div>
       <div className="header-item">
         <a href="/login">Login</a>
