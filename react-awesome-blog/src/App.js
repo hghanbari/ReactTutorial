@@ -6,6 +6,8 @@ import Navbar from "./components/Navbar";
 import HomePage from "./components/pages/HomePage";
 import PostPage from "./components/pages/PostPage";
 import LoginPage from "./components/pages/LoginPage";
+import PrivateRoute from "./components/PrivateRoute";
+import ProfilePage from "./components/pages/ProfilePage";
 
 function App() {
   const { theme } = useContext(ThemeContext);
@@ -20,6 +22,7 @@ function App() {
             <Route path="/user/:userId" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<HomePage />} />
+            <Route path="/profile/*" element={<PrivateRoute />} />
           </Routes>
         </div>
         <div className="footer">Awesome blog. All rights reserved</div>

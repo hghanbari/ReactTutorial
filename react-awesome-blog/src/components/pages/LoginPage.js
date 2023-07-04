@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useEffect, useReducer, useState } from "react";
-import { redirect, Link, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useReducer, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ThemeContext } from "../../ThemeContext";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -22,7 +23,11 @@ const reducer = (state, action) => {
 };
 
 export default function LoginPage() {
+  const { user, setUser } = useContext(ThemeContext);
   const navigate = useNavigate();
+  if (user) {
+    navigate("/profile");
+  }
   const [state, dispatch] = useReducer(reducer, {
     loading: false,
     error: "",
@@ -49,6 +54,7 @@ export default function LoginPage() {
   };
   useEffect(() => {
     if (loggedInUser) {
+      setUser(loggedInUser);
       return navigate("/profile");
     }
   }, [loggedInUser]);
