@@ -1,7 +1,7 @@
-import axios from "axios";
 import React, { useEffect, useReducer } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
+import api from "../../api";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -28,8 +28,8 @@ export default function PostPage() {
   const fetchPost = async () => {
     dispatch({ type: "POST_REQUEST" });
     try {
-      const { data } = await axios.get(`/api/posts/${postId}`);
-      const { data: userData } = await axios.get(`/api/users/${data.userId}`);
+      const { data } = await api.get(`/api/posts/${postId}`);
+      const { data: userData } = await api.get(`/api/users/${data.userId}`);
       dispatch({ type: "POST_SUCCESS", payload: { ...data, user: userData } });
     } catch (err) {
       dispatch({ type: "POST_FAIL", payload: err.message });

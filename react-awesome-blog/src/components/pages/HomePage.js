@@ -1,6 +1,6 @@
-import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import React, { useEffect, useReducer } from "react";
+import api from "../../api";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -60,7 +60,7 @@ export default function HomePage() {
   const loadPosts = async () => {
     dispatch({ type: "POSTS_REQUEST" });
     try {
-      const { data } = await axios.get(
+      const { data } = await api.get(
         userId ? "/api/posts?userId=" + userId : "/api/posts"
       );
       const filterPosts = query
@@ -76,7 +76,7 @@ export default function HomePage() {
   const loadUsre = async () => {
     dispatch({ type: "USERS_REQUEST" });
     try {
-      const { data } = await axios.get(
+      const { data } = await api.get(
         userId ? "/api/users" + userId : "/api/users"
       );
       dispatch({
