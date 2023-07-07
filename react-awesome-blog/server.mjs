@@ -51,6 +51,32 @@ app.get("/api/users/:id", async (req, res) => {
   }
 });
 
+app.post("/api/users", async (req, res) => {
+  if (!req.body.name || !req.body.email || !req.body.password) {
+    return res.send({ message: "Data is required" });
+  }
+  const user = new User(req.body);
+  const createdUser = await user.save();
+  res.send(createdUser);
+});
+
+// Update profile
+app.put("api/usres:id", async (req, res) => {
+  const { id } = req.params;
+  const { email, password, phone, name, website } = req.body;
+  const user = await User.findOne(id);
+  if (user) {
+    user.email = email;
+    user.phone = phone;
+    user.website = website;
+    user.name = name;
+    user.password = password;
+    const updatUser = await user.save();
+    res.send(updatUser);
+  } else {
+    res.status(404).send({ message: "User not found" });
+  }
+});
 // POST
 
 const Post = mongoose.model(
@@ -83,6 +109,15 @@ app.get("/api/posts/:id", async (req, res) => {
   } else {
     res.status(404).send({ message: "Post not found" });
   }
+});
+
+app.post("/api/posts", async (req, res) => {
+  if (!req.body.title || !req.body.bod) {
+    return res.send({ message: "Data is required" });
+  }
+  const post = new Post(req.body);
+  const createdPost = await post.save();
+  res.send(createdPost);
 });
 
 // creat user & post  model
