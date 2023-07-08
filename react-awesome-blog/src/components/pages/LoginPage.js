@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../../api";
 import React, { useContext, useEffect, useReducer, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../../ThemeContext";
@@ -26,7 +26,7 @@ export default function LoginPage() {
   const { user, setUser } = useContext(ThemeContext);
   const navigate = useNavigate();
   if (user) {
-    navigate("/profile");
+    navigate("/");
   }
   const [state, dispatch] = useReducer(reducer, {
     loading: false,
@@ -40,8 +40,8 @@ export default function LoginPage() {
     e.preventDefault();
     dispatch({ type: "LOGIN_REQUEST" });
     try {
-      const { data } = await axios(
-        `https://jsonplaceholder.typicode.com/users?email=${email}&password=${password}`
+      const { data } = await api(
+        `/api/users?email=${email}&password=${password}`
       );
       if (data.length > 0) {
         dispatch({ type: "LOGIN_SUCCESS", pyload: data[0] });
@@ -55,7 +55,7 @@ export default function LoginPage() {
   useEffect(() => {
     if (loggedInUser) {
       setUser(loggedInUser);
-      return navigate("/profile");
+      return navigate("/");
     }
   }, [loggedInUser]);
   return (

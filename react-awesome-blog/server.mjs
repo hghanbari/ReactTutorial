@@ -112,7 +112,7 @@ app.get("/api/posts/:id", async (req, res) => {
 });
 
 app.post("/api/posts", async (req, res) => {
-  if (!req.body.title || !req.body.bod) {
+  if (!req.body.title || !req.body.body) {
     return res.send({ message: "Data is required" });
   }
   const post = new Post(req.body);
