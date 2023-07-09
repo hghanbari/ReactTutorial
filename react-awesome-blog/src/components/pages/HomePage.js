@@ -1,5 +1,5 @@
-import { Link, useParams } from "react-router-dom";
 import React, { useEffect, useReducer } from "react";
+import { Link, useParams } from "react-router-dom";
 import api from "../../api";
 
 const reducer = (state, action) => {

@@ -15,9 +15,11 @@ export default function Navbar() {
   return (
     <div className="header">
       <div className="header-item">
-        <Link to="/">
-          <strong>Awesome Blog</strong>
-        </Link>
+        <NavLink
+          to="/"
+          className={({ isActive }) => (isActive ? "" : "active")}>
+          Awesome Blog
+        </NavLink>
       </div>
       <div className="header-item">
         <form onSubmit={handleSubmit}>

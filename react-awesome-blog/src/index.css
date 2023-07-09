@@ -92,7 +92,9 @@ a:hover {
   align-items: center;
   border-bottom: 1px #404040 solid;
 }
-
+.header-item > a {
+  padding: 20px;
+}
 .footer {
   padding: 10px;
   min-width: 50px;
@@ -136,4 +138,7 @@ a:hover {
 }
 .error {
   color: #c04040;
+}
+.success {
+  color: #40c040;
 }
