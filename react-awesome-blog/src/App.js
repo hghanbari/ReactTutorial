@@ -8,6 +8,7 @@ import PostPage from "./components/pages/PostPage";
 import LoginPage from "./components/pages/LoginPage";
 import CreatePostPage from "./components/pages/CreatePostPage";
 import ProfilePage from "./components/pages/ProfilePage";
+import RegisterPage from "./components/pages/RegisterPage";
 
 function App() {
   const { theme } = useContext(ThemeContext);
@@ -24,6 +25,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/profile/*" element={<ProfilePage />} />
             <Route path="/create/*" element={<CreatePostPage />} />
+            <Route path="/register" element={<RegisterPage />} />
           </Routes>
         </div>
         <div className="footer">Awesome blog. All rights reserved</div>
