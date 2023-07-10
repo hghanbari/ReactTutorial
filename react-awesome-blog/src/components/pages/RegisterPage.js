@@ -1,6 +1,6 @@
 import api from "../../api";
 import React, { useContext, useEffect, useReducer, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { ThemeContext } from "../../ThemeContext";
 
 const reducer = (state, action) => {
