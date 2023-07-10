@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useReducer, useState } from "react";
 import { ThemeContext } from "../../ThemeContext";
 import api from "../../api";
-import AccessDenied from "../AccessDenied";
+import { Navigate } from "react-router-dom";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -29,10 +29,6 @@ const reducer = (state, action) => {
 
 export default function ProfilePage() {
   const { user, setUser } = useContext(ThemeContext);
-  if (!user) {
-    return <AccessDenied />;
-  }
-
   const [state, dispatch] = useReducer(reducer, {
     loading: false,
     updatedUser: null,
@@ -78,6 +74,9 @@ export default function ProfilePage() {
       setWebsite(user.website);
     }
   }, [updatedUser]);
+  if (!user) {
+    return <Navigate replace to="/login" />;
+  }
   return (
     <div>
       <h1>{user.name}'s Profile</h1>

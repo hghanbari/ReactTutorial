@@ -61,24 +61,24 @@ app.post("/api/users", async (req, res) => {
 });
 
 // Update profile
-app.put("api/usres:id", async (req, res) => {
+app.put("/api/users/:id", async (req, res) => {
   const { id } = req.params;
-  const { email, password, phone, name, website } = req.body;
-  const user = await User.findOne(id);
+  const { email, name, phone, password, website } = req.body;
+  const user = await User.findOne({ id });
   if (user) {
     user.email = email;
-    user.phone = phone;
-    user.website = website;
     user.name = name;
+    user.phone = phone;
     user.password = password;
-    const updatUser = await user.save();
-    res.send(updatUser);
+    user.website = website;
+    const updateUser = await user.save();
+    res.send(updateUser);
   } else {
     res.status(404).send({ message: "User not found" });
   }
 });
-// POST
 
+// POST
 const Post = mongoose.model(
   "posts",
   new mongoose.Schema(
